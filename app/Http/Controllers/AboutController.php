@@ -15,7 +15,7 @@ class AboutController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $about = About::with('image' , 'locales', 'about_category');
+            $about = About::with('image' , 'locales', 'about_categories');
         } else {
             $about = About::with('image' , 'locale', 'about_category');
         }
