@@ -38,7 +38,7 @@ class About extends Model
 
     public function category()
     {
-        return $this->belongsTo(AboutCategory::class , 'id','about_');
+        return $this->belongsTo(AboutCategory::class , 'id');
     }
 
 }
