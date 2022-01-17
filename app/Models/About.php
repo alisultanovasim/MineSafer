@@ -6,11 +6,11 @@ use App\Traits\Localizable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\AboutLocale;
 
 class About extends Model
 {
     use HasFactory, Localizable;
+
     protected $keyType = 'integer';
     protected $fillable = ['image_uuid', 'about_category_id'];
     protected $localeModel = AboutLocale::class;
@@ -18,7 +18,7 @@ class About extends Model
     protected $localableFields = ['text'];
 
     protected $file = File::class;
-    protected $key  = 'image_uuid';
+    protected $key = 'image_uuid';
 
     public function image(): BelongsTo
     {
@@ -38,7 +38,12 @@ class About extends Model
 
     public function category()
     {
-        return $this->belongsTo(AboutCategory::class , 'about_category_id');
+        return $this->belongsTo(AboutCategory::class, 'about_category_id', 'id')->with('locale');
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo(AboutCategory::class, 'about_category_id', 'id')->with('locales');
     }
 
 }

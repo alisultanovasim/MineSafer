@@ -1,11 +1,10 @@
 <?php
 
-use App\Enums\GalleryType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Processes extends Migration
+class CreateProcessesCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +13,8 @@ class Processes extends Migration
      */
     public function up()
     {
-        Schema::create('processes', function (Blueprint $table) {
+        Schema::create('news_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid("image_uuid")->constrained("files")->nullable();
-            $table->integer("processes_category_id");
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class Processes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('processes');
+        Schema::dropIfExists('news_categories');
     }
 }

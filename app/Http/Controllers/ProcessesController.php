@@ -17,9 +17,9 @@ class ProcessesController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $processes = Process::query()->with('image', 'locales');
+            $processes = Process::query()->with('image', 'locales','categories');
         } else {
-            $processes = Process::query()->with('image', 'locale');
+            $processes = Process::query()->with('image', 'locale','category');
         }
         return $this->dataResponse($processes->simplePaginate($this->getPerPage()));
     }
@@ -36,7 +36,7 @@ class ProcessesController extends Controller
         return $this->dataResponse($process);
     }
 
-    
+
     public function store(Request $request)
     {
         $this->validate($request, $this->getValidationRules(), $this->customAttributes());
@@ -46,7 +46,8 @@ class ProcessesController extends Controller
         DB::transaction(function () use ($request, &$process_id) {
             $process = new Process();
             $process->fill($request->only([
-                'image_uuid'
+                'image_uuid',
+                'processes_category_id'
             ]));
             $process->save();
 
@@ -67,7 +68,8 @@ class ProcessesController extends Controller
         DB::transaction(function () use ($request, $id) {
             $process = Process::findOrFail($id);
             $process->fill($request->only([
-                'image_uuid'
+                'image_uuid',
+                'processes_category_id'
             ]));
 
             $process->save();
@@ -97,6 +99,7 @@ class ProcessesController extends Controller
     {
         return [
             'image_uuid' => 'required|exists:files,id',
+            'processes_category_id' => 'required|numeric',
             'locales.*.local' => 'required',
             'locales.*.text' => 'required',
         ];
@@ -105,6 +108,7 @@ class ProcessesController extends Controller
     public function customAttributes(): array
     {
         return [
+            'processes_category_id.required' => 'Processes category mütləqdir',
             'image_uuid.required' => 'İmage id mütləqdir',
             'image_uuid.exists' => 'İmage id mövcud deyil',
             'locales.*.text.required' => 'Mətn mütləqdir',

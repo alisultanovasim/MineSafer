@@ -13,15 +13,20 @@ class Process extends Model
     protected $localeModel = ProcessLocale::class;
     protected $localableFields = ['text'];
     protected $keyType = 'integer';
-    protected $fillable = ['text' , 'image_uuid'];
+    protected $fillable = ['text' , 'image_uuid','processes_category_id'];
 
     public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_uuid');
     }
 
-    // public function processLocales()
-    // {
-    //     return $this->hasMany(ProcessLocale::class , 'process_id');
-    // }
+    public function category()
+    {
+        return $this->belongsTo(ProcessesCategory::class , 'processes_category_id' , 'id')->with('locale');
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo(ProcessesCategory::class , 'processes_category_id' , 'id')->with('locales');
+    }
 }
