@@ -15,9 +15,9 @@ class AboutController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $about = About::with('image' , 'locales', 'category');
+            $about = About::with('image' , 'locales', 'about_category');
         } else {
-            $about = About::with('image' , 'locale', 'category');
+            $about = About::with('image' , 'locale', 'about_category');
         }
         return $this->dataResponse($about->simplePaginate($this->getPerPage()));
     }

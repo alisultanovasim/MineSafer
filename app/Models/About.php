@@ -19,7 +19,7 @@ class About extends Model
 
     protected $file = File::class;
     protected $key  = 'image_uuid';
-    
+
     public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_uuid');
@@ -38,7 +38,7 @@ class About extends Model
 
     public function category()
     {
-        return $this->belongsTo(AboutCategory::class , 'id');
+        return $this->belongsTo(AboutCategory::class , 'id','about_');
     }
 
 }
