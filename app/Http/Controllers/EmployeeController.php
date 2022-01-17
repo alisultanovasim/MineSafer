@@ -101,6 +101,7 @@ class EmployeeController extends Controller
             'locales.*.local' => 'required',
             'locales.*.text' => 'required',
             'locales.*.position_name' => 'required',
+            'locales.*.full_name' => 'required',
         ];
     }
 
@@ -111,6 +112,7 @@ class EmployeeController extends Controller
             'image_uuid.exists' => 'İmage id mövcud deyil',
             'locales.*.text.required' => 'Mətn mütləqdir',
             'locales.*.position_name.required' => 'Pozisiya mütləqdir',
+            'locales.*.full_name.required' => 'Ad soyad mütləqdir',
             'locales.*.local.required' => 'Dil seçimi mütləqdir'
         ];
     }

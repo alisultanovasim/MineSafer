@@ -17,6 +17,7 @@ class EmployeeLocales extends Migration
             $table->uuid("id")->primary()->unique()->index();
             $table->foreignId("employee_id")->constrained("employees")->nullable()->onDelete('cascade');
             $table->longText('text')->nullable();
+            $table->string('full_name');
             $table->string('position_name');
             $table->string('local' , 3)->default('az');
             $table->timestamps();
