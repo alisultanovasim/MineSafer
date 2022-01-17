@@ -91,6 +91,7 @@ class LeaderShipController extends Controller
             'locales.*.local' => 'required',
             'locales.*.full_name' => 'required',
             'locales.*.position' => 'required',
+            'locales.*.text' => 'required',
         ];
     }
 
@@ -101,7 +102,8 @@ class LeaderShipController extends Controller
             'image_uuid.exists' => 'İmage id mövcud deyil',
             'locales.*.full_name.required' => 'Ad Soyad mütləqdir',
             'locales.*.position.required' => 'Vəzifə mütləqdir',
-            'locales.*.local.required' => 'Dil seçimi mütləqdir'
+            'locales.*.local.required' => 'Dil seçimi mütləqdir',
+            'locales.*.text.required' => 'Text mütləqdir'
 
         ];
     }

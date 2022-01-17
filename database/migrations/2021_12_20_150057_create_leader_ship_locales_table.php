@@ -19,6 +19,7 @@ class CreateLeaderShipLocalesTable extends Migration
             $table->foreignId("leader_ship_id")->constrained("leader_ships")->onDelete('cascade');
             $table->string('full_name')->nullable();
             $table->string('position')->nullable();
+            $table->longText('text')->nullable();
             $table->timestamps();
         });
     }

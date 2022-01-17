@@ -35,7 +35,7 @@ class EmployeeController extends Controller
         return $this->dataResponse($employee);
     }
 
-    
+
     public function store(Request $request)
     {
         $this->validate($request, $this->getValidationRules(), $this->customAttributes());
