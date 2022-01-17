@@ -14,7 +14,7 @@ class Employee extends Model
     protected $table = 'employees';
     protected $localeModel = EmployeeLocale::class;
     protected $keyType = 'integer';
-    protected $localableFields = ['text' , 'position_name'];
+    protected $localableFields = ['text' , 'position_name','full_name'];
     protected $fillable = ['text' ,'image_uuid', 'position_name' , 'order'];
 
     public function image(): BelongsTo

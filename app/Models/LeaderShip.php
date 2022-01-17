@@ -13,7 +13,7 @@ class LeaderShip extends Model
     use HasFactory , Localizable , FileRelation;
     protected $localeModel = LeaderShipLocale::class;
     protected $keyType = 'integer';
-    protected $localableFields = ['full_name' , 'position'];
+    protected $localableFields = ['full_name' , 'position','text'];
     protected $fillable = ['status', 'image_uuid'];
 
     protected $file = File::class;

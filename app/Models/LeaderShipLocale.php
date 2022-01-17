@@ -10,5 +10,5 @@ class LeaderShipLocale extends Model
 {
     use HasFactory, UsesUuid;
     protected $keyType = 'string';
-    protected $fillable = ['leader_ships_id', 'full_name', 'local' , 'position'];
+    protected $fillable = ['leader_ships_id', 'full_name', 'local' , 'position','text'];
 }

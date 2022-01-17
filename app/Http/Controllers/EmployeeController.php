@@ -4,15 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Traits\ApiResponder;
+use App\Traits\Paginatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Traits\Paginatable;
 
 class EmployeeController extends Controller
 {
     use ApiResponder, Paginatable;
 
     private $perPage;
+
+    public function changeOrder(Request $request, $id)
+    {
+        $this->validate($request, [
+            'order' => 'required|numeric|unique:employees,order,' . $id
+        ], [
+            'order.required' => 'Sıra mütləqdir'
+        ]);
+
+        $employee = Employee::findOrFail($id);
+
+        $employee->fill($request->only([
+            'order'
+        ]));
+        $employee->save();
+
+        return $this->successResponse(trans('responses.ok'));
+    }
 
     public function index()
     {
@@ -97,7 +115,7 @@ class EmployeeController extends Controller
     {
         return [
             'image_uuid' => 'required|exists:files,id',
-            'order' => 'required|numeric|unique:employees,order,'.$id,
+            'order' => 'required|numeric|unique:employees,order,' . $id,
             'locales.*.local' => 'required',
             'locales.*.text' => 'required',
             'locales.*.position_name' => 'required',

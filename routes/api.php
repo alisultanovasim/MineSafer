@@ -118,6 +118,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::apiResource('imsmas', ImsmaController::class);
     Route::apiResource('chronologies', ChronologyController::class);
     Route::apiResource('employees', EmployeeController::class);
+    Route::post("employees/order/{id}",[EmployeeController::class,'changeOrder']);
     Route::apiResource('languages', LanguageController::class);
     Route::apiResource('legislations', LegislationController::class);
     Route::apiResource('abouts', AboutController::class);
