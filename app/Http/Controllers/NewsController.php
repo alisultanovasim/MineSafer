@@ -98,6 +98,8 @@ class NewsController extends Controller
     {
         return [
             'news_category_id' => 'required|numeric|exists:news_categories,id',
+            'category' => 'required',
+            'date' => 'required',
             'image_uuid' => 'required|exists:files,id',
             'locales.*.local' => 'required',
             'locales.*.text' => 'required',
@@ -108,6 +110,8 @@ class NewsController extends Controller
     public function customAttributes(): array
     {
         return [
+            'category.required' => 'Kategoriya mütləqdir',
+            'date.required' => 'Tarix mütləqdir',
             'news_category_id.required' => 'Kateqoriya adı mütləqdir',
             'news_category_id.exists' => 'Kateqoriya id mövcud deyil',
             'image_uuid.required' => 'Image id mütləqdir',
