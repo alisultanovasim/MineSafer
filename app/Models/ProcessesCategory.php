@@ -10,7 +10,7 @@ class ProcessesCategory extends Model
 {
     use HasFactory, Localizable;
 
-    protected $localeModel = NewsCategoryLocale::class;
+    protected $localeModel = ProcessesCategoryLocale::class;
     protected $keyType = 'integer';
     protected $localableFields = ['name'];
     protected $table = 'news_categories';
