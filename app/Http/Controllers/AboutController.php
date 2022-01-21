@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Traits\ApiResponder;
 use App\Traits\Paginatable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AboutController extends Controller
 {
     use ApiResponder, Paginatable;
+
     private $perPage;
+
     public function index()
     {
         if (auth()->check()) {
-            $about = About::with('image' , 'locales', 'category','categories');
+            $about = About::with('image', 'locales', 'categories');
         } else {
-            $about = About::with('image' , 'locale', 'category');
+            $about = About::with('image', 'locale', 'category');
         }
         return $this->dataResponse($about->simplePaginate($this->getPerPage()));
     }

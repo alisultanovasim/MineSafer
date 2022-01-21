@@ -4,14 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\About;
 
 class AboutCategory extends Model
 {
     use HasFactory;
-
     protected $fillable = ['date'];
-
     protected $table = 'about_categories';
 
     public function abouts()

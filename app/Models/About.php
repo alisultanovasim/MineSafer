@@ -25,25 +25,15 @@ class About extends Model
         return $this->belongsTo(File::class, 'image_uuid');
     }
 
-    // public function abouts()
-    // {
-    //     return $this->hasMany(AboutCategory::class, 'about_category_id')->with('image' , 'locales');
-    // }
-
-
-    // public function aboutLocales()
-    // {
-    //     return $this->hasMany(AboutLocale::class , 'about_id');
-    // }
 
     public function category()
     {
-        return $this->belongsTo(AboutCategory::class, 'about_category_id', 'id')->with('locale');
+        return $this->belongsTo(AboutCategory::class, 'about_category_id', 'id');
     }
 
     public function categories()
     {
-        return $this->belongsTo(AboutCategory::class, 'about_category_id', 'id')->with('locales');
+        return $this->belongsTo(AboutCategory::class, 'about_category_id', 'id');
     }
 
 }
