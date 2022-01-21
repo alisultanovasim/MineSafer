@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AboutCategoryController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AllProjectCategoryController;
 use App\Http\Controllers\AllProjectController;
@@ -27,6 +26,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PhotoFolderController;
 use App\Http\Controllers\PressController;
+use App\Http\Controllers\ProcessCategoryController;
 use App\Http\Controllers\ProcessesController;
 use App\Http\Controllers\ProcessIconController;
 use App\Http\Controllers\ProjectCategoryController;
@@ -34,15 +34,16 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QualityController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RegionDataController;
-use App\Http\Controllers\SubPagesController;
-use App\Http\Controllers\VideoController;
-use App\Http\Controllers\WorkAboutController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\SubPagesController;
 use App\Http\Controllers\SumRegionController;
 use App\Http\Controllers\TrainingCategoryController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\WorkAboutController;
+use Illuminate\Support\Facades\Route;
 
 // Front Routes
 
@@ -58,6 +59,7 @@ Route::prefix('client')->middleware('locale')->group(function () {
     Route::apiResource('videos', VideoController::class)->only(['index', 'show']);
     Route::apiResource('presses', PressController::class)->only(['index', 'show']);
     Route::apiResource('processesIcons', ProcessIconController::class)->only(['index', 'show']);
+    Route::apiResource('processes-category', ProcessCategoryController::class)->only(['index', 'show']);
     Route::apiResource('processes', ProcessesController::class)->only(['index', 'show']);
     Route::apiResource('qualities', QualityController::class)->only(['index', 'show']);
     Route::apiResource('imsmas', ImsmaController::class)->only(['index', 'show']);
@@ -114,11 +116,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::apiResource('presses', PressController::class);
     Route::apiResource('processesIcons', ProcessIconController::class);
     Route::apiResource('processes', ProcessesController::class);
+    Route::apiResource('processes-category', ProcessCategoryController::class);
     Route::apiResource('qualities', QualityController::class);
     Route::apiResource('imsmas', ImsmaController::class);
     Route::apiResource('chronologies', ChronologyController::class);
     Route::apiResource('employees', EmployeeController::class);
-    Route::put("employees/order/{id}",[EmployeeController::class,'changeOrder']);
+    Route::put("employees/order/{id}", [EmployeeController::class, 'changeOrder']);
     Route::apiResource('languages', LanguageController::class);
     Route::apiResource('legislations', LegislationController::class);
     Route::apiResource('abouts', AboutController::class);
