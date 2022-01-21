@@ -16,7 +16,7 @@ class News extends Model
     protected $localeModel = NewsLocale::class;
     protected $keyType = 'integer';
     protected $localableFields = ['text' , 'title'];
-    protected $fillable = ['text', 'news_category_id' , 'is_active' , 'position','category','date'];
+    protected $fillable = ['text', 'news_category_id' , 'is_active' ,'category','date'];
 
     protected $file = File::class;
     protected $key  = 'image_uuid';
