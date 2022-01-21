@@ -13,7 +13,7 @@ class ProcessesCategory extends Model
     protected $localeModel = ProcessesCategoryLocale::class;
     protected $keyType = 'integer';
     protected $localableFields = ['name'];
-    protected $table = 'news_categories';
+    protected $table = 'processes_categories';
 
     public function processes()
     {
