@@ -16,7 +16,6 @@ class CreateNewsTable extends Migration
             $table->bigInteger('news_category_id')->unsigned();
             $table->integer('category');
             $table->integer('is_active')->default(0);
-            $table->integer('position')->default(0);
             $table->timestamp('date');
             $table->timestamps();
 
