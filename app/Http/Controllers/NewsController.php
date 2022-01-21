@@ -49,7 +49,6 @@ class NewsController extends Controller
             $news->image_uuid = $request->image_uuid;
             $news->is_active = $request->is_active;
             $news->news_category_id = $request->news_category_id;
-            $news->position = $request->position;
             $news->date = $request->date;
             $news->save();
 
@@ -72,7 +71,6 @@ class NewsController extends Controller
             $news->image_uuid = $request->image_uuid;
             $news->is_active = $request->is_active;
             $news->news_category_id = $request->news_category_id;
-            $news->position = $request->position;
             $news->date = $request->date;
             $news->save();
 
