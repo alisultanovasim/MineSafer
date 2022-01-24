@@ -50,6 +50,7 @@ class NewsController extends Controller
             $news->is_active = $request->is_active;
             $news->news_category_id = $request->news_category_id;
             $news->date = $request->date;
+            $news->category = $request->cateogory;
             $news->save();
 
             $news->setLocales($request->input("locales"));
@@ -72,6 +73,7 @@ class NewsController extends Controller
             $news->is_active = $request->is_active;
             $news->news_category_id = $request->news_category_id;
             $news->date = $request->date;
+            $news->category = $request->cateogory;
             $news->save();
 
             $news->setLocales($request->input("locales"));
