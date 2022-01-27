@@ -17,9 +17,9 @@ class PhotoController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $photos = PhotoFolder::with('locales', 'photos')->orderBy('created_at', 'desc')->get();
+            $photos = Photo::with('locales', 'photos')->orderBy('created_at', 'desc')->get();
         } else {
-            $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at', 'desc')->get();
+            $photos = Photo::with('locale', 'photos')->orderBy('created_at', 'desc')->get();
         }
         return $this->dataResponse($photos);
     }
@@ -28,9 +28,9 @@ class PhotoController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $photoFolder = PhotoFolder::with('locales', 'photos')->findOrFail($id);
+            $photoFolder = Photo::with('locales', 'photos')->findOrFail($id);
         } else {
-            $photoFolder = PhotoFolder::with('locale', 'photos')->findOrFail($id);
+            $photoFolder = Photo::with('locale', 'photos')->findOrFail($id);
         }
         return $this->dataResponse($photoFolder);
     }
