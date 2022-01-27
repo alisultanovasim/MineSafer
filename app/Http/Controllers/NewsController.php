@@ -21,6 +21,10 @@ class NewsController extends Controller
         } else {
             $news = News::with('locale', 'image', 'category');
         }
+
+        if (request()->filled('category')) {
+            $news = $news->where('category', request()->get('category'));
+        }
         return $this->dataResponse($news->simplePaginate($this->getPerPage()));
     }
 
@@ -28,14 +32,11 @@ class NewsController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $news = News::with('image', 'locales', 'categories');
+            $news = News::with('image', 'locales', 'categories')->findOrFail($id);
         } else {
-            $news = News::with('image', 'locale', 'category');
+            $news = News::with('image', 'locale', 'category')->findOrFail($id);
         }
-        if (request()->filled('category')) {
-            $news=$news->where('category',request()->get('category'));
-        }
-        $news = $news->findOrFail($id);
+
         return $this->dataResponse($news);
     }
 
