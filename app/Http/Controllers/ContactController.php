@@ -13,7 +13,7 @@ class ContactController extends Controller
 
     public function index()
     {
-        $contacts = Contact::where('id', 1)->all();
+        $contacts = Contact::where('id', 1)->get();
         return $this->dataResponse($contacts);
     }
 
