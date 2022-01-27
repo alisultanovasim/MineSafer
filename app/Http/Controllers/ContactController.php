@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
-use App\Models\Contact;
 
 class ContactController extends Controller
 {
@@ -13,7 +13,7 @@ class ContactController extends Controller
 
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::where('id', 1)->all();
         return $this->dataResponse($contacts);
     }
 
