@@ -29,9 +29,9 @@ class PhotoController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $photoFolder = Photo::with('images', 'folders')->findOrFail($id);
+            $photoFolder = Photo::with('images', 'folders')->find($id);
         } else {
-            $photoFolder = Photo::with('images', 'folder')->findOrFail($id);
+            $photoFolder = Photo::with('images', 'folder')->find($id);
         }
         return $this->dataResponse($photoFolder);
     }
