@@ -17,9 +17,9 @@ class PhotoController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $photos = Photo::with('locales', 'photos')->orderBy('created_at', 'desc')->get();
+            $photos = PhotoFolder::with('locales', 'photos')->orderBy('created_at', 'desc')->get();
         } else {
-            $photos = Photo::with('locale', 'photos')->orderBy('created_at', 'desc')->get();
+            $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at', 'desc')->get();
         }
         return $this->dataResponse($photos);
     }
