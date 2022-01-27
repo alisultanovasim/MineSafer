@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\NewsCategory;
 use App\Traits\ApiResponder;
 use App\Traits\Paginatable;
 use Illuminate\Http\Request;
@@ -29,10 +28,14 @@ class NewsController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $news = News::with('image', 'locales', 'categories')->findOrFail($id);
+            $news = News::with('image', 'locales', 'categories');
         } else {
-            $news = News::with('image', 'locale', 'category')->findOrFail($id);
+            $news = News::with('image', 'locale', 'category');
         }
+        if (request()->filled('category')) {
+            $news=$news->where('category',request()->get('category'));
+        }
+        $news = $news->findOrFail($id);
         return $this->dataResponse($news);
     }
 
