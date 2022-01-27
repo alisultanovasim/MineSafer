@@ -7,7 +7,6 @@ use App\Models\PhotoFolder;
 use App\Traits\ApiResponder;
 use App\Traits\Paginatable;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class PhotoController extends Controller
 {
@@ -18,9 +17,9 @@ class PhotoController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $photos = PhotoFolder::with('locales', 'photos')->orderBy('created_at' , 'desc')->get();
+            $photos = PhotoFolder::with('locales', 'photos')->orderBy('created_at', 'desc')->get();
         } else {
-            $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at' , 'desc')->get();
+            $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at', 'desc')->get();
         }
         return $this->dataResponse($photos);
     }
@@ -29,9 +28,9 @@ class PhotoController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $photoFolder = Photo::with('images', 'folders')->firstOrFail($id);
+            $photoFolder = Photo::where('id', $id)->with('images', 'folders')->firstOrFail();
         } else {
-            $photoFolder = Photo::with('images', 'folder')->firstOrFail($id);
+            $photoFolder = Photo::where('id', $id)->where()->with('images', 'folder')->firstOrFail();
         }
         return $this->dataResponse($photoFolder);
     }
