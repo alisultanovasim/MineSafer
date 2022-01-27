@@ -28,9 +28,9 @@ class PhotoController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $photoFolder = PhotoFolder::with('locales', 'photos')->firstOrFail($id);
+            $photoFolder = PhotoFolder::with('locales', 'photos')->where('id',$id)->firstOrFail();
         } else {
-            $photoFolder = PhotoFolder::with('locale', 'photos')->firstOrFail($id);
+            $photoFolder = PhotoFolder::with('locale', 'photos')->where('id',$id)->firstOrFail();
         }
         return $this->dataResponse($photoFolder);
     }
