@@ -47,6 +47,7 @@ class StatisticsController extends Controller
             $statistic->unexplosive = $request->unexplosive;
             $statistic->pedestrian = $request->pedestrian;
             $statistic->type = $request->type;
+            $statistic->region_id = $request->region_id;
             $statistic->created_at = now();
             $statistic->save();
             $statistic->setLocales($request->locales);
@@ -67,6 +68,7 @@ class StatisticsController extends Controller
             $statistic->unexplosive = $request->unexplosive;
             $statistic->pedestrian = $request->pedestrian;
             $statistic->type = $request->type;
+            $statistic->region_id = $request->region_id;
             $statistic->updated_at = now();
             $statistic->save();
             $statistic->setLocales($request->locales);
