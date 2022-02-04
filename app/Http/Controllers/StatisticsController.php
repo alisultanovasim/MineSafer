@@ -95,7 +95,6 @@ class StatisticsController extends Controller
             'clean_area' => 'integer',
             'unexplosive' => 'integer',
             'pedestrian' => 'integer',
-            'clean_area' => 'integer',
             'type' => 'required',
             'locales.*.local' => 'required',
             'locales.*.title' => 'required'
