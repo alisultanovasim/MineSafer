@@ -15,13 +15,11 @@ class CreateStatisticsTable extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->integer('year')->nullable();
-            $table->integer('month')->nullable();
-            $table->integer('week')->nullable();
             $table->integer('tank')->nullable()->comment('tank eleyhine mina');
             $table->integer('clean_area')->nullable()->comment('temizlenen erazi');
             $table->integer('unexplosive')->nullable()->comment('Partlamayan hərbi sursat');
             $table->integer('pedestrian')->nullable()->comment('piyada eleyhine mina');
+            $table->string('type')->nullable(false);
             $table->timestamps();
         });
     }

@@ -14,11 +14,14 @@ class StatisticsController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $statistics = Statistics::with('locales')->get();
+            $statistics = Statistics::with('locales');
         } else {
-            $statistics = Statistics::with('locale')->get();
+            $statistics = Statistics::with('locale');
         }
-        return $this->dataResponse($statistics);
+        if (request()->filled('statistics')) {
+            $statistics = $statistics->where('statistics', request()->get('category'));
+        }
+        return $this->dataResponse($statistics->get());
     }
 
 
@@ -39,13 +42,11 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request) {
             $statistic = new Statistics;
-            $statistic->year = $request->year;
-            $statistic->month = $request->month;
-            $statistic->week = $request->week;
             $statistic->tank = $request->tank;
             $statistic->clean_area = $request->clean_area;
             $statistic->unexplosive = $request->unexplosive;
             $statistic->pedestrian = $request->pedestrian;
+            $statistic->type = $request->type;
             $statistic->created_at = now();
             $statistic->save();
             $statistic->setLocales($request->locales);
@@ -61,13 +62,11 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request, $id) {
             $statistic = Statistics::findOrFail($id);
-            $statistic->year = $request->year;
-            $statistic->month = $request->month;
-            $statistic->week = $request->week;
             $statistic->tank = $request->tank;
             $statistic->clean_area = $request->clean_area;
             $statistic->unexplosive = $request->unexplosive;
             $statistic->pedestrian = $request->pedestrian;
+            $statistic->type = $request->type;
             $statistic->updated_at = now();
             $statistic->save();
             $statistic->setLocales($request->locales);
@@ -92,14 +91,12 @@ class StatisticsController extends Controller
     private function getValidationRules($id = null): array
     {
         return [
-            'year' => 'integer',
-            'month' => 'integer',
-            'week' => 'integer',
             'tank' => 'integer',
             'clean_area' => 'integer',
             'unexplosive' => 'integer',
             'pedestrian' => 'integer',
             'clean_area' => 'integer',
+            'type' => 'required',
             'locales.*.local' => 'required',
             'locales.*.title' => 'required'
         ];
@@ -108,15 +105,13 @@ class StatisticsController extends Controller
     public function customAttributes(): array
     {
         return [
-            'year.integer' => 'İl sayı rəqəm olmalıdır',
-            'month.integer' => 'Ay sayı rəqəm olmalıdır',
-            'week.integer' => 'Həftə sayı rəqəm olmalıdır',
             'tank.integer' => 'Tank sayı rəqəm olmalıdır',
             'clean_area.integer' => 'Təmizlənən ərazi sayı rəqəm olmalıdır',
             'unexplosive.integer' => 'Partlamayan hərbi sursat sayı rəqəm olmalıdır',
             'pedestrian.integer' => 'Piyada əleyhinə mina sayı rəqəm olmalıdır',
             'locales.*.local.required' => 'Dil seçimi mütləqdir',
-            'locales.*.title.required' => 'Başlıq mütləqdir'
+            'locales.*.title.required' => 'Başlıq mütləqdir',
+            'type' => 'Tip mütləqdir'
         ];
     }
 }
