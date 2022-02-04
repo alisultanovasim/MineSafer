@@ -12,5 +12,5 @@ class Statistics extends Model
     protected $localeModel = StatisticsLocale::class;
     protected $localableFields = ['title'];
     protected $keyType = 'integer';
-    protected $fillable = ['tank', 'clean_area', 'unexplosive', 'pedestrian','type'];
+    protected $fillable = ['tank', 'clean_area', 'unexplosive', 'pedestrian','type','region_id'];
 }
