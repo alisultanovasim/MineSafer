@@ -92,6 +92,7 @@ class StatisticsController extends Controller
     {
         return [
             'tank' => 'integer',
+            'region_id' => 'integer',
             'clean_area' => 'integer',
             'unexplosive' => 'integer',
             'pedestrian' => 'integer',
@@ -110,7 +111,8 @@ class StatisticsController extends Controller
             'pedestrian.integer' => 'Piyada əleyhinə mina sayı rəqəm olmalıdır',
             'locales.*.local.required' => 'Dil seçimi mütləqdir',
             'locales.*.title.required' => 'Başlıq mütləqdir',
-            'type' => 'Tip mütləqdir'
+            'type' => 'Tip mütləqdir',
+            'region_id' => 'Region ID mütləqdir'
         ];
     }
 }
