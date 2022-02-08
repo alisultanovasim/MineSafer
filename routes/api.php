@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Route;
 
 // Front Routes
 
-Route::prefix('client')->group(function () {
+Route::prefix('client')->middleware('locale')->group(function () {
 
     Route::apiResource('trainings', TrainingController::class)->only('store');
     Route::apiResource('pages', PageController::class)->only(['index', 'show']);
