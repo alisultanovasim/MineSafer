@@ -14,12 +14,12 @@ class AboutCategoryController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $about = AboutCategory::with('abouts')->get();
+            $about = AboutCategory::with('abouts');
         } else {
-            $about = AboutCategory::with('about')->get();
+            $about = AboutCategory::with('about');
         }
 
-        return $this->dataResponse($about);
+        return $this->dataResponse($about->orderByDesc('date')->get());
     }
 
 
