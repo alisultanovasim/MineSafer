@@ -19,7 +19,7 @@ class PageController extends Controller
         if (auth()->check()) {
             $pages = page::with('locales', 'image', 'subPages');
         } else {
-            $pages = page:: with('locale', 'image', 'subPage');
+            $pages = page::where('is_active', 1)->with('locale', 'image', 'subPage');
         }
         return $this->dataResponse($pages->simplePaginate($this->getPerPage()));
     }
