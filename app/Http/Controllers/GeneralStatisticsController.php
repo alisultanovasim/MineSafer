@@ -29,7 +29,7 @@ class GeneralStatisticsController extends Controller
 
     public function store(Request $request)
     {
-        GeneralStatistics::delete();
+        GeneralStatistics::query()->delete();
         $this->validate($request, $this->getValidationRules(), $this->customAttributes());
 
         DB::transaction(function () use ($request) {
