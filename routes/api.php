@@ -89,6 +89,7 @@ Route::prefix('client')->middleware('locale')->group(function () {
     Route::apiResource('partners', PartnerController::class)->only(['index', 'show']);
     Route::apiResource('country/sites', CountrySiteController::class)->only(['index', 'show']);
     Route::apiResource('statistics', StatisticsController::class)->only(['index', 'show']);
+    Route::apiResource('generalStatistics', StatisticsController::class)->only(['index', 'show']);
     Route::apiResource('contact/forms', ContactFormController::class);
     Route::apiResource('contacts', ContactController::class)->only(['index', 'show']);
     Route::apiResource('vacancies', VacancyController::class)->only(['index', 'show']);
@@ -145,6 +146,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::apiResource('partners', PartnerController::class);
     Route::apiResource('country/sites', CountrySiteController::class);
     Route::apiResource('statistics', StatisticsController::class);
+    Route::apiResource('generalStatistics', StatisticsController::class);
     Route::apiResource('contact/forms', ContactFormController::class);
     Route::apiResource('contacts', ContactController::class);
     Route::apiResource('vacancies', VacancyController::class);

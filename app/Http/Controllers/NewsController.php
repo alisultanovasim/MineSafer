@@ -16,11 +16,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        if (auth()->check()) {
-            $news = News::with('locales', 'image', 'categories');
-        } else {
-            $news = News::with('locale', 'image', 'categories');
-        }
+        $news = News::with('locales', 'image', 'categories');
 
         if (request()->filled('category')) {
             $news = $news->where('category', request()->get('category'));
