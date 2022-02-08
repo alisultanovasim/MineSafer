@@ -112,7 +112,8 @@ class GeneralStatisticsController extends Controller
     public function customAttributes(): array
     {
         return [
-            'integer' => ':attribute sayı rəqəm olmalıdır'
+            'integer' => ':attribute sayı rəqəm olmalıdır',
+            'required' => ':attribute sayı mütləq olmalıdır',
         ];
     }
 }
