@@ -16,10 +16,10 @@ class PageController extends Controller
 
     public function index()
     {
-        if (!auth()->check()) {
-            $pages = page::where('is_active' , 1 )->with('locale' , 'image' , 'subPage');
+        if (auth()->check()) {
+            $pages = page::with('locales', 'image', 'subPages');
         } else {
-            $pages = page::with('locales' , 'image' , 'subPages');
+            $pages = page::where('is_active', 1)->with('locale', 'image', 'subPage');
         }
         return $this->dataResponse($pages->simplePaginate($this->getPerPage()));
     }
@@ -28,9 +28,9 @@ class PageController extends Controller
     public function show($id)
     {
         if (!auth()->check()) {
-            $page = Page::where('is_active' , 1)->with('locale' , 'image' , 'subPage')->findOrFail($id);
+            $page = Page::where('is_active', 1)->with('locale', 'image', 'subPage')->findOrFail($id);
         } else {
-            $page = Page::with('locales' , 'image' , 'subPages')->findOrFail($id);
+            $page = Page::with('locales', 'image', 'subPages')->findOrFail($id);
         }
         return $this->dataResponse($page);
     }
@@ -99,7 +99,7 @@ class PageController extends Controller
         // dd($id);
         return [
             'image_uuid' => 'required|exists:files,id',
-            'key' => 'unique:pages,key,'.$id,
+            'key' => 'unique:pages,key,' . $id,
             'is_active' => 'required|boolean',
             'locales.*.local' => 'required',
             'locales.*.name' => 'required',

@@ -11,10 +11,12 @@ use App\Models\File;
 class Page extends Model
 {
     use HasFactory, Localizable;
-    protected $localeModel = PageLocale::class;
-    protected $localableFields = ['name', 'local'];
     protected $keyType = 'integer';
     protected $fillable = ['is_active', 'key' , 'image_uuid'];
+    protected $localeModel = PageLocale::class;
+
+    protected $localableFields = ['name', 'local'];
+
     public $timestamps = false;
 
     public function subPages()
