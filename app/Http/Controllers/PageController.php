@@ -17,7 +17,7 @@ class PageController extends Controller
     public function index()
     {
         if (!auth()->check()) {
-            $pages = page::where('is_active' , 1 )->with('locales' , 'image' , 'subPage');
+            $pages = page::where('is_active' , 1 )->with('locale' , 'image' , 'subPage');
         } else {
             $pages = page::with('locales' , 'image' , 'subPages');
         }
