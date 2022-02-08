@@ -14,7 +14,7 @@ class PageController extends Controller
 
     private $perPage;
 
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         if (auth()->check()) {
             $pages = page::with('locales', 'image', 'subPages');
