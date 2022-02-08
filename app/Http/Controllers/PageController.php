@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use App\Models\Page;
 use App\Traits\ApiResponder;
 use App\Traits\Paginatable;
@@ -14,7 +15,7 @@ class PageController extends Controller
 
     private $perPage;
 
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(): JsonResponse
     {
         if (auth()->check()) {
             $pages = page::with('locales', 'image', 'subPages');
