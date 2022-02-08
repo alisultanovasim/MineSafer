@@ -92,20 +92,20 @@ class GeneralStatisticsController extends Controller
     private function getValidationRules($id = null): array
     {
         return [
-            'clean_area_year' => 'integer',
-            'clean_area_week' => 'integer',
-            'clean_area_monthly' => 'integer',
-            'unexplosive_year' => 'integer',
-            'unexplosive_week' => 'integer',
-            'unexplosive_monthly' => 'integer',
-            'unexplosive_monthly' => 'integer',
-            'pedestrian_year' => 'integer',
-            'pedestrian_week' => 'integer',
-            'pedestrian_monthly' => 'integer',
-            'pedestrian_monthly' => 'integer',
-            'tank_year' => 'integer',
-            'tank_week' => 'integer',
-            'tank_monthly' => 'integer',
+            'clean_area_year' => 'required|integer',
+            'clean_area_week' => 'required|integer',
+            'clean_area_monthly' => 'required|integer',
+            'unexplosive_year' => 'required|integer',
+            'unexplosive_week' => 'required|integer',
+            'unexplosive_monthly' => 'required|integer',
+            'unexplosive_monthly' => 'required|integer',
+            'pedestrian_year' => 'required|integer',
+            'pedestrian_week' => 'required|integer',
+            'pedestrian_monthly' => 'required|integer',
+            'pedestrian_monthly' => 'required|integer',
+            'tank_year' => 'required|integer',
+            'tank_week' => 'required|integer',
+            'tank_monthly' => 'required|integer',
         ];
     }
 
