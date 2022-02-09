@@ -66,7 +66,7 @@ class FileController extends Controller
     public function uploadVideo(Request $request): JsonResponse
     {
         $this->validate($request, [
-            'video_uuid' => 'required|max:51200'
+            'video_uuid' => 'required|max:800000'
         ]);
 
         $video = $this->fileService->uploadFile($request->file('video_uuid'));
