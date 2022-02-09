@@ -16,7 +16,7 @@ class CreateWorkAboutLocalesTable extends Migration
         Schema::create('work_about_locales', function (Blueprint $table) {
             $table->uuid("id")->primary()->unique()->index();
             $table->foreignId("work_about_id")->constrained("work_abouts")->onDelete('cascade');
-            $table->string('text')->nullable();
+            $table->longText('text')->nullable();
             $table->string('local', 3)->default('az');
             $table->timestamps();
         });
