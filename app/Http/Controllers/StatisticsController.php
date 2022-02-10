@@ -22,8 +22,8 @@ class StatisticsController extends Controller
             $statistics = $statistics->where('type', request()->get('type'));
         }
 
-        if (request()->filled('regionId')) {
-            $statistics = $statistics->where('region_id', request()->get('regionId'));
+        if (request()->filled('region_id')) {
+            $statistics = $statistics->where('region_id', request()->get('region_id'));
         }
         return $this->dataResponse($statistics->get());
     }
