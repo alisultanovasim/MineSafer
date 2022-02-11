@@ -18,4 +18,8 @@ class Video extends Model
     protected $file = File::class;
     protected $key  = 'image_uuid';
 
+     public function image()
+     {
+         return $this->belongsTo(File::class , 'image_uuid');
+     }
 }

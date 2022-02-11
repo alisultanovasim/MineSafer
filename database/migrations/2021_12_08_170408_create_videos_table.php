@@ -15,6 +15,7 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid("image_uuid")->constrained("files")->nullable();
             $table->string('url');
             $table->timestamps();
         });
