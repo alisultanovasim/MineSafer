@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Localizable;
-use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\File;
 
 class Video extends Model
 {
@@ -15,5 +15,7 @@ class Video extends Model
     protected $keyType = 'integer';
     protected $fillable = ['url'];
 
-    
+    protected $file = File::class;
+    protected $key  = 'image_uuid';
+
 }

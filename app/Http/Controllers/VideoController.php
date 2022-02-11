@@ -18,9 +18,9 @@ class VideoController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $videos = Video::with('locales')->get();
+            $videos = Video::with('locales','image')->get();
         } else {
-            $videos = Video::with('locale')->get();
+            $videos = Video::with('locale','image')->get();
         }
         return $this->dataResponse($videos);
     }
@@ -29,9 +29,9 @@ class VideoController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $video = Video::with('locales')->findOrFail($id);
+            $video = Video::with('locales','image')->findOrFail($id);
         } else {
-            $video = Video::with('locale')->findOrFail($id);
+            $video = Video::with('locale','image')->findOrFail($id);
         }
         return $this->dataResponse($video);
     }
@@ -44,6 +44,7 @@ class VideoController extends Controller
         $video_id = null;
         DB::transaction(function () use ($request, &$video_id) {
             $video = new Video;
+            $video->image_uuid = $request->image_uuid;
             $video->url = $request->url;
             $video->save();
 
@@ -62,6 +63,7 @@ class VideoController extends Controller
 
         DB::transaction(function () use ($request, $id) {
             $video = Video::findOrFail($id);
+            $video->image_uuid = $request->image_uuid;
             $video->url = $request->url;
             $video->save();
             $video->setLocales($request->input("locales"));
@@ -84,6 +86,7 @@ class VideoController extends Controller
     {
         return [
             'url' => 'required|url',
+            'image_uuid' => 'required|exists:files,id',
             'locales.*.local' => 'required',
             'locales.*.title' => 'required',
         ];
@@ -92,6 +95,8 @@ class VideoController extends Controller
     public function customAttributes(): array
     {
         return [
+            'image_uuid.required' => 'Image id mütləqdir',
+            'image_uuid.exists' => 'Image id mövcud deyil',
             'url.required' => 'Url mütləqdir',
             'url.url' => 'Url düzgün deyil',
             'locales.*.title.required' => 'Başlıq mütləqdir',
