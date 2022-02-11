@@ -21,7 +21,7 @@ class NewsController extends Controller
         if (request()->filled('category')) {
             $news = $news->where('category', request()->get('category'));
         }
-        return $this->dataResponse($news->simplePaginate($this->getPerPage()));
+        return $this->dataResponse($news->paginate($this->getPerPage()));
     }
 
 
