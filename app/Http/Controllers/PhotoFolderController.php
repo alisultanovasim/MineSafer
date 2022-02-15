@@ -22,7 +22,7 @@ class PhotoFolderController extends Controller
         } else {
             $photos = PhotoFolder::with('locale', 'image', 'photos')->orderBy('created_at');
         }
-        return $this->dataResponse($photos->paginate($this->perPage));
+        return $this->dataResponse($photos->paginate($this->getPerPage()));
     }
 
 
