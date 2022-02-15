@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\PhotoFolder;
 use App\Traits\ApiResponder;
+use App\Traits\Paginatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PhotoFolderController extends Controller
 {
-    use ApiResponder;
+    use ApiResponder, Paginatable;
+
+    private $perPage;
+
     public function index()
     {
 
         if (auth()->check()) {
-            $photos = PhotoFolder::with('locales', 'image', 'photos')->orderBy('created_at', 'asc')->get();
+            $photos = PhotoFolder::with('locales', 'image', 'photos')->orderBy('created_at');
         } else {
-            $photos = PhotoFolder::with('locale', 'image', 'photos')->orderBy('created_at', 'asc')->get();
+            $photos = PhotoFolder::with('locale', 'image', 'photos')->orderBy('created_at');
         }
-        return $this->dataResponse($photos);
+        return $this->dataResponse($photos->paginate($this->perPage));
     }
 
 

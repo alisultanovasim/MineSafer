@@ -18,11 +18,11 @@ class VideoController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $videos = Video::with('locales','image')->get();
+            $videos = Video::with('locales','image');
         } else {
-            $videos = Video::with('locale','image')->get();
+            $videos = Video::with('locale','image');
         }
-        return $this->dataResponse($videos);
+        return $this->dataResponse($videos->paginate($this->getPerPage()));
     }
 
 

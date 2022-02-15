@@ -17,11 +17,11 @@ class PhotoController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $photos = PhotoFolder::with('locales', 'photos')->orderBy('created_at', 'desc')->get();
+            $photos = PhotoFolder::with('locales', 'photos')->orderBy('created_at', 'desc');
         } else {
-            $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at', 'desc')->get();
+            $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at', 'desc');
         }
-        return $this->dataResponse($photos);
+        return $this->dataResponse($photos->paginate($this->perPage));
     }
 
 
