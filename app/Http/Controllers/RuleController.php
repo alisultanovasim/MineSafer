@@ -53,7 +53,7 @@ class RuleController extends Controller
 
         DB::transaction(function () use ($request, $id) {
             $rule = Rule::findOrFail($id);
-            $rule->updatet_at = now();
+            $rule->updated_at = now();
             $rule->save();
             $rule->setLocales($request->input("locales"));
         });
