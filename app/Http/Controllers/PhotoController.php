@@ -21,7 +21,7 @@ class PhotoController extends Controller
         } else {
             $photos = PhotoFolder::with('locale', 'photos')->orderBy('created_at', 'desc');
         }
-        return $this->dataResponse($photos->paginate($this->perPage));
+        return $this->dataResponse($photos->paginate($this->getPerPage()));
     }
 
 
