@@ -31,8 +31,8 @@ class News extends Model
         return $this->belongsTo(NewsCategory::class , 'news_category_id' , 'id')->with('locales');
     }
 
-    // public function image()
-    // {
-    //     return $this->belongsTo(File::class , 'image_uuid');
-    // }
+     public function image()
+     {
+         return $this->belongsTo(File::class , 'image_uuid');
+     }
 }
