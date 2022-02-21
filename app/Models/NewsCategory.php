@@ -22,6 +22,6 @@ class NewsCategory extends Model
 
     public function oneNews()
     {
-        return $this->hasMany(News::class , 'news_category_id')->with('locale');
+        return $this->hasMany(News::class , 'news_category_id')->with('locale','image');
     }
 }
