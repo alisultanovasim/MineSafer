@@ -26,7 +26,7 @@ class FileController extends Controller
     {
         $this->validate($request, [
             'images' => 'required',
-            'images.*' => 'mimes:jpeg,jpg,png',
+            'images.*' => 'mimes:jpeg,jpg,png,svg',
         ]);
 
         $arr = [];
@@ -43,7 +43,7 @@ class FileController extends Controller
     public function uploadSingleImage(Request $request): JsonResponse
     {
         $this->validate($request, [
-            'image_uuid' => 'required|image|mimes:jpg,jpeg,png'
+            'image_uuid' => 'required|image|mimes:jpg,jpeg,png,svg'
         ]);
 
         $image = $this->fileService->uploadFile($request->file('image_uuid'));
