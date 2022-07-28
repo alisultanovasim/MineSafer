@@ -38,8 +38,8 @@ class PublicCouncilController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->getValidationRules(), $this->customAttributes());
-        PublicCouncil::query()->delete();
         PublicCouncilLocale::query()->delete();
+        PublicCouncil::query()->delete();
         DB::transaction(function () use ($request) {
             $publicCouncil = new PublicCouncil();
             $publicCouncil->created_at = now();
