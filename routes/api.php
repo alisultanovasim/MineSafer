@@ -143,6 +143,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::apiResource('photos', PhotoController::class);
     Route::apiResource('photo/folders', PhotoFolderController::class);
     Route::apiResource('sum/regions', SumRegionController::class);
+    Route::apiResource('public-council', PublicCouncilController::class);
     Route::apiResource('regions', RegionController::class);
     Route::apiResource('data/regions', RegionDataController::class);
     Route::apiResource('leaderships', LeaderShipController::class);
