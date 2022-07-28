@@ -80,7 +80,7 @@ class PublicCouncilController extends Controller
     {
         return [
             'locales.*.local' => 'required',
-            'locales.*.title' => 'required'
+            'locales.*.text' => 'required'
         ];
     }
 
