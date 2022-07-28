@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PublicCouncil;
+use App\Models\PublicCouncilLocale;
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,8 @@ class PublicCouncilController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->getValidationRules(), $this->customAttributes());
-
+        PublicCouncil::query()->delete();
+        PublicCouncilLocale::query()->delete();
         DB::transaction(function () use ($request) {
             $publicCouncil = new PublicCouncil();
             $publicCouncil->created_at = now();
