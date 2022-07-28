@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GeneralStatisticsController;
+use App\Http\Controllers\PublicCouncilController;
 use App\Http\Controllers\AboutCategoryController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AllProjectCategoryController;
@@ -52,6 +53,7 @@ Route::prefix('client')->middleware('locale')->group(function () {
 
     Route::apiResource('trainings', TrainingController::class)->only('store');
     Route::apiResource('pages', PageController::class)->only(['index', 'show']);
+    Route::apiResource('public-council', PublicCouncilController::class)->only(['index', 'show']);
     Route::apiResource('rules', RuleController::class)->only(['index', 'show']);
     Route::apiResource('banners', BannerController::class)->only(['index', 'show']);
     Route::apiResource('sub/pages', SubPagesController::class)->only(['index', 'show']);
