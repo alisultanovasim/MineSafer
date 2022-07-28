@@ -14,9 +14,9 @@ class StatisticsController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $statistics = Statistics::with('locales');
+            $statistics = Statistics::with('locales', 'image');
         } else {
-            $statistics = Statistics::with('locale');
+            $statistics = Statistics::with('locale', 'image');
         }
 
         if (request()->filled('region_id')) {

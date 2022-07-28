@@ -13,5 +13,13 @@ class Statistics extends Model
     protected $localeModel = StatisticsLocale::class;
     protected $localableFields = ['title'];
     protected $keyType = 'integer';
-    protected $fillable = ['clean_area', 'region_id'];
+    protected $fillable = ['clean_area', 'region_id', 'image_uuid'];
+
+    protected $file = File::class;
+    protected $key = 'image_uuid';
+
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_uuid');
+    }
 }
