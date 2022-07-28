@@ -18,7 +18,7 @@ class ProjectCategoryController extends Controller
         if (auth()->check()) {
             $categories = ProjectCategory::with('image', 'locales', 'projects')->get();
         } else {
-            $categories = ProjectCategory::with('image', 'locale', 'project')->get();
+            $categories = ProjectCategory::with('image', 'locale', 'project')->orderByDesct('created_at')->get();
         }
         return $this->dataResponse($categories);
     }
@@ -34,7 +34,7 @@ class ProjectCategoryController extends Controller
         return $this->dataResponse($category);
     }
 
-    
+
     public function store(Request $request)
     {
         $this->validate($request, $this->getValidationRules(), $this->customAttributes());
