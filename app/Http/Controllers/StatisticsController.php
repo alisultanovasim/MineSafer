@@ -18,9 +18,6 @@ class StatisticsController extends Controller
         } else {
             $statistics = Statistics::with('locale');
         }
-        if (request()->filled('type')) {
-            $statistics = $statistics->where('type', request()->get('type'));
-        }
 
         if (request()->filled('region_id')) {
             $statistics = $statistics->where('region_id', request()->get('region_id'));
