@@ -29,9 +29,9 @@ class StatisticsController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $statistic = Statistics::with('locales')->findOrFail($id);
+            $statistic = Statistics::with('locales','image')->findOrFail($id);
         } else {
-            $statistic = Statistics::with('locale')->findOrFail($id);
+            $statistic = Statistics::with('locale','image')->findOrFail($id);
         }
         return $this->dataResponse($statistic);
     }
@@ -43,6 +43,7 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request) {
             $statistic = new Statistics;
+            $statistic->image_uuid = $request->image_uuid;
             $statistic->clean_area = $request->clean_area;
             $statistic->region_id = $request->region_id;
             $statistic->created_at = now();
@@ -61,6 +62,7 @@ class StatisticsController extends Controller
         DB::transaction(function () use ($request, $id) {
             $statistic = Statistics::findOrFail($id);
             $statistic->clean_area = $request->clean_area;
+            $statistic->image_uuid = $request->image_uuid;
             $statistic->region_id = $request->region_id;
             $statistic->updated_at = now();
             $statistic->save();
@@ -86,6 +88,7 @@ class StatisticsController extends Controller
     private function getValidationRules($id = null): array
     {
         return [
+            'image_uuid' => 'required|exists:files,id',
             'region_id' => 'integer',
             'clean_area' => 'integer',
             'locales.*.local' => 'required',
@@ -96,6 +99,8 @@ class StatisticsController extends Controller
     public function customAttributes(): array
     {
         return [
+            'image_uuid.required' => 'İmage id mütləqdir',
+            'image_uuid.exists' => 'İmage id mövcud deyil',
             'clean_area.integer' => 'Təmizlənən ərazi sayı rəqəm olmalıdır',
             'locales.*.local.required' => 'Dil seçimi mütləqdir',
             'locales.*.title.required' => 'Başlıq mütləqdir',
