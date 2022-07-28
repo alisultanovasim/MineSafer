@@ -46,11 +46,7 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request) {
             $statistic = new Statistics;
-            $statistic->tank = $request->tank;
             $statistic->clean_area = $request->clean_area;
-            $statistic->unexplosive = $request->unexplosive;
-            $statistic->pedestrian = $request->pedestrian;
-            $statistic->type = $request->type;
             $statistic->region_id = $request->region_id;
             $statistic->created_at = now();
             $statistic->save();
@@ -67,11 +63,7 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request, $id) {
             $statistic = Statistics::findOrFail($id);
-            $statistic->tank = $request->tank;
             $statistic->clean_area = $request->clean_area;
-            $statistic->unexplosive = $request->unexplosive;
-            $statistic->pedestrian = $request->pedestrian;
-            $statistic->type = $request->type;
             $statistic->region_id = $request->region_id;
             $statistic->updated_at = now();
             $statistic->save();
@@ -97,12 +89,8 @@ class StatisticsController extends Controller
     private function getValidationRules($id = null): array
     {
         return [
-            'tank' => 'integer',
             'region_id' => 'integer',
             'clean_area' => 'integer',
-            'unexplosive' => 'integer',
-            'pedestrian' => 'integer',
-            'type' => 'required',
             'locales.*.local' => 'required',
             'locales.*.title' => 'required'
         ];
@@ -111,13 +99,9 @@ class StatisticsController extends Controller
     public function customAttributes(): array
     {
         return [
-            'tank.integer' => 'Tank sayı rəqəm olmalıdır',
             'clean_area.integer' => 'Təmizlənən ərazi sayı rəqəm olmalıdır',
-            'unexplosive.integer' => 'Partlamayan hərbi sursat sayı rəqəm olmalıdır',
-            'pedestrian.integer' => 'Piyada əleyhinə mina sayı rəqəm olmalıdır',
             'locales.*.local.required' => 'Dil seçimi mütləqdir',
             'locales.*.title.required' => 'Başlıq mütləqdir',
-            'type' => 'Tip mütləqdir',
             'region_id' => 'Region ID mütləqdir'
         ];
     }
