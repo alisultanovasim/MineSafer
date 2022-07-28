@@ -20,7 +20,7 @@ class PublicCouncilController extends Controller
             $publicCouncil = PublicCouncil::with('locale');
         }
 
-        return $this->dataResponse($publicCouncil->limit(1)->orderByDesc('id')->first());
+        return $this->dataResponse($publicCouncil->first());
     }
 
 
