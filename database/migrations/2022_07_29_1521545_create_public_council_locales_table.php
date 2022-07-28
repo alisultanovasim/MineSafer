@@ -17,7 +17,7 @@ class CreatePublicCouncilLocalesTable extends Migration
             $table->uuid("id")->primary()->unique()->index();
             $table->string('local', 3);
             $table->foreignId("public_council_id")->constrained("public_councils")->onDelete('cascade');
-            $table->string('name');
+            $table->longText('text');
             $table->timestamps();
         });
     }
