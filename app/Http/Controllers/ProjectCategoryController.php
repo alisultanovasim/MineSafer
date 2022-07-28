@@ -18,7 +18,7 @@ class ProjectCategoryController extends Controller
         if (auth()->check()) {
             $categories = ProjectCategory::with('image', 'locales', 'projects')->get();
         } else {
-            $categories = ProjectCategory::with('image', 'locale', 'project')->orderByDesct('created_at')->get();
+            $categories = ProjectCategory::with('image', 'locale', 'project')->orderByDesc('created_at')->get();
         }
         return $this->dataResponse($categories);
     }
