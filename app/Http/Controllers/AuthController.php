@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Traits\ApiResponder;
@@ -17,7 +18,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','recaptcha']]);
     }
 
     public function recaptcha(Request $request)
@@ -27,14 +28,11 @@ class AuthController extends Controller
                 'g-recaptcha-response' => 'required'
         ]);
 
-
-        $secret = '6Lc5yh8kAAAAAA8UzixWcdOpGSH66W6xmKp-fPaT';
-
-
+        $secret = Config::get('recaptcha.secret_key');
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/dev-client-anama.vac.az");
+        curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
 
 
         curl_setopt($ch, CURLOPT_POST, 1);
