@@ -14,12 +14,9 @@ class StatisticsController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $statistics = Statistics::with('locales');
+            $statistics = Statistics::with('locales', 'image');
         } else {
-            $statistics = Statistics::with('locale');
-        }
-        if (request()->filled('type')) {
-            $statistics = $statistics->where('type', request()->get('type'));
+            $statistics = Statistics::with('locale', 'image');
         }
 
         if (request()->filled('region_id')) {
@@ -32,9 +29,9 @@ class StatisticsController extends Controller
     public function show($id)
     {
         if (auth()->check()) {
-            $statistic = Statistics::with('locales')->findOrFail($id);
+            $statistic = Statistics::with('locales','image')->findOrFail($id);
         } else {
-            $statistic = Statistics::with('locale')->findOrFail($id);
+            $statistic = Statistics::with('locale','image')->findOrFail($id);
         }
         return $this->dataResponse($statistic);
     }
@@ -46,11 +43,8 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request) {
             $statistic = new Statistics;
-            $statistic->tank = $request->tank;
+            $statistic->image_uuid = $request->image_uuid;
             $statistic->clean_area = $request->clean_area;
-            $statistic->unexplosive = $request->unexplosive;
-            $statistic->pedestrian = $request->pedestrian;
-            $statistic->type = $request->type;
             $statistic->region_id = $request->region_id;
             $statistic->created_at = now();
             $statistic->save();
@@ -67,11 +61,8 @@ class StatisticsController extends Controller
 
         DB::transaction(function () use ($request, $id) {
             $statistic = Statistics::findOrFail($id);
-            $statistic->tank = $request->tank;
             $statistic->clean_area = $request->clean_area;
-            $statistic->unexplosive = $request->unexplosive;
-            $statistic->pedestrian = $request->pedestrian;
-            $statistic->type = $request->type;
+            $statistic->image_uuid = $request->image_uuid;
             $statistic->region_id = $request->region_id;
             $statistic->updated_at = now();
             $statistic->save();
@@ -97,12 +88,9 @@ class StatisticsController extends Controller
     private function getValidationRules($id = null): array
     {
         return [
-            'tank' => 'integer',
+            'image_uuid' => 'required|exists:files,id',
             'region_id' => 'integer',
             'clean_area' => 'integer',
-            'unexplosive' => 'integer',
-            'pedestrian' => 'integer',
-            'type' => 'required',
             'locales.*.local' => 'required',
             'locales.*.title' => 'required'
         ];
@@ -111,13 +99,11 @@ class StatisticsController extends Controller
     public function customAttributes(): array
     {
         return [
-            'tank.integer' => 'Tank sayı rəqəm olmalıdır',
+            'image_uuid.required' => 'İmage id mütləqdir',
+            'image_uuid.exists' => 'İmage id mövcud deyil',
             'clean_area.integer' => 'Təmizlənən ərazi sayı rəqəm olmalıdır',
-            'unexplosive.integer' => 'Partlamayan hərbi sursat sayı rəqəm olmalıdır',
-            'pedestrian.integer' => 'Piyada əleyhinə mina sayı rəqəm olmalıdır',
             'locales.*.local.required' => 'Dil seçimi mütləqdir',
             'locales.*.title.required' => 'Başlıq mütləqdir',
-            'type' => 'Tip mütləqdir',
             'region_id' => 'Region ID mütləqdir'
         ];
     }

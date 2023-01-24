@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GeneralStatisticsController;
+use App\Http\Controllers\PublicCouncilController;
 use App\Http\Controllers\AboutCategoryController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AllProjectCategoryController;
@@ -52,6 +53,7 @@ Route::prefix('client')->middleware('locale')->group(function () {
 
     Route::apiResource('trainings', TrainingController::class)->only('store');
     Route::apiResource('pages', PageController::class)->only(['index', 'show']);
+    Route::apiResource('public-council', PublicCouncilController::class)->only(['index', 'show']);
     Route::apiResource('rules', RuleController::class)->only(['index', 'show']);
     Route::apiResource('banners', BannerController::class)->only(['index', 'show']);
     Route::apiResource('sub/pages', SubPagesController::class)->only(['index', 'show']);
@@ -142,6 +144,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::apiResource('photos', PhotoController::class);
     Route::apiResource('photo/folders', PhotoFolderController::class);
     Route::apiResource('sum/regions', SumRegionController::class);
+    Route::apiResource('public-council', PublicCouncilController::class);
     Route::apiResource('regions', RegionController::class);
     Route::apiResource('data/regions', RegionDataController::class);
     Route::apiResource('leaderships', LeaderShipController::class);

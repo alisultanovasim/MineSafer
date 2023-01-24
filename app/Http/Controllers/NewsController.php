@@ -19,7 +19,7 @@ class NewsController extends Controller
         if (auth()->check()) {
             $news = News::with('image', 'locales', 'categories');
         } else {
-            $news = News::with('image', 'locale', 'category');
+            $news = News::with('image', 'locale', 'category')->orderByDesc('created_at');
         }
 
         if (request()->filled('category')) {
