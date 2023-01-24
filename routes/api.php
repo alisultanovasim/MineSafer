@@ -100,6 +100,7 @@ Route::prefix('client')->middleware('locale')->group(function () {
 //Back Routes
 
 Route::post('admin/login', [AuthController::class, 'login'])->name('login');
+Route::post('admin/recaptcha', [AuthController::class, 'recaptcha']);
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);

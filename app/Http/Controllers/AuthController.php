@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Traits\ApiResponder;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -19,10 +20,57 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
+    public function recaptcha(Request $request)
+    {
+        $this->validate($request,[
+                'email' => 'required|string|email|max:255',
+                'g-recaptcha-response' => 'required'
+        ]);
+
+
+        $secret = '6Lc5yh8kAAAAAA8UzixWcdOpGSH66W6xmKp-fPaT';
+
+
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/dev-client-anama.vac.az");
+
+
+        curl_setopt($ch, CURLOPT_POST, 1);
+
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS,
+
+            "secret=".$secret."&response=".$request['g-recaptcha-response']);
+
+
+
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($ch);
+
+
+        $responseData = json_decode($result , TRUE);
+
+
+        curl_close ($ch);
+
+
+
+        if($responseData['success'] == false){
+
+            return $this->errorResponse('Robot olmadığınızı təsdiq edin.',Response::HTTP_BAD_REQUEST);
+
+        }
+        return $this->successResponse('Təsdiqləndi!',Response::HTTP_OK);
+    }
+
     public function login(Request $request): JsonResponse
     {
         $this->validate($request, [
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email',
             'password' => 'required|string|min:6|max:255'
         ]);
 
