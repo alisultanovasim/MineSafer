@@ -18,14 +18,14 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','recaptcha']]);
+        $this->middleware('auth:api', ['except' => ['login']]);
     }
 
     public function recaptcha(Request $request)
     {
         $this->validate($request,[
                 'email' => 'required|string|email|max:255',
-                'g-recaptcha-response' => 'required'
+                'g-recaptcha-response' => 'required|recaptcha'
         ]);
 
         $secret = Config::get('recaptcha.secret_key');
@@ -51,7 +51,6 @@ class AuthController extends Controller
 
 
         $responseData = json_decode($result , TRUE);
-
 
         curl_close ($ch);
 
