@@ -25,7 +25,7 @@ class AuthController extends Controller
     {
         $this->validate($request,[
                 'email' => 'required|string|email|max:255',
-                'g-recaptcha-response' => 'required|recaptcha'
+                'g-recaptcha-response' => 'required'
         ]);
 
         $secret = Config::get('recaptcha.secret_key');
@@ -53,8 +53,6 @@ class AuthController extends Controller
         $responseData = json_decode($result , TRUE);
 
         curl_close ($ch);
-
-
 
         if($responseData['success'] == false){
 
